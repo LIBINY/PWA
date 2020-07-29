@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>manifest</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 引入应用程序清单 -->
+    <link rel="manifest" href="manifest.json">
+</head>
+
+<body>
+    <h1>hello caches</h1>
+    <script>
+        window.addEventListener('load', async (e) => {
+            if ('serviceWorker' in navigator) {
+                try {
+                    const registation = navigator.serviceWorker.register('./sw.js')
+                    console.log('注册成功，作用域为', registation.scope)
+                } catch (error) {
+                    console.log('注册失败')
+                }
+
+            }
+        })
+        // 先询问是否允许发送通知
+        if (Notification.permission === 'default') {
+            Notification.requestPermission()
+        }
+        // 没网的情况下发送通知
+        if (!navigator.onLine) {
+            new Notification('提示', {
+                body: '当前没有网络，你访问的是缓存'
+            })
+        }
+
+        window.addEventListener('online', () => {
+            new Notification('提示', {
+                body: '你已经连上网络了，请刷新请求最新数据'
+            })
+        })
+        window.addEventListener('offline', () => {
+            new Notification('提示', {
+                body: '网络丢失，将访问缓存数据'
+            })
+        })
+    </script>
+</body>
+
+</html>

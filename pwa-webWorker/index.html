@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>web worker</title>
+</head>
+
+<body>
+    <script>
+        //创建一个worker
+        const worker = new Worker('worker.js')
+        console.log('start')
+        worker.onmessage = e => {
+            console.log(e.data)
+        }
+        worker.postMessage({
+            result: 111
+        })
+        console.log('end')
+    </script>
+</body>
+
+</html>

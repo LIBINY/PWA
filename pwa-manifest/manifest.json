@@ -1,0 +1,13 @@
+{
+    "name": "厦门点触科技资讯",
+    "short_name": "点触科技",
+    "start_url": "/index.html",
+    "icons": [{
+        "src": "logo2.png",
+        "sizes": "144x144",
+        "type": "image/png"
+    }],
+    "background_color": "pink",
+    "theme_color": "skyblue",
+    "display": "standalone"
+}
